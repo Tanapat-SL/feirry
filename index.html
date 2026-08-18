@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>รักแฟร์รี่ ❤️</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #ffb6d9, #ffcce8, #fff0f7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            color: #ff3b81;
+            font-size: 40px;
+            margin-bottom: 30px;
+        }
+
+        button {
+            border: none;
+            background: #ff4f91;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 50, 120, 0.3);
+        }
+
+        button:hover {
+            transform: scale(1.08);
+        }
+
+        #heart {
+            display: none;
+            position: relative;
+            width: 500px;
+            height: 450px;
+            margin: auto;
+        }
+
+        .word {
+            position: absolute;
+            color: #ff2875;
+            font-size: 18px;
+            font-weight: bold;
+            white-space: nowrap;
+            animation: appear 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: scale(0);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .love {
+            font-size: 38px;
+            color: #ff1768;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div id="start">
+        <h1>มีอะไรจะบอก... 💌</h1>
+        <button onclick="showHeart()">กดตรงนี้ 💗</button>
+    </div>
+
+    <div id="heart">
+        <!-- คำว่า รักแฟร์รี่ จะถูกสร้างตรงนี้ -->
+    </div>
+
+</div>
+
+<script>
+    function showHeart() {
+        document.getElementById("start").style.display = "none";
+
+        const heart = document.getElementById("heart");
+        heart.style.display = "block";
+
+        // จุดต่าง ๆ สำหรับสร้างรูปหัวใจ
+        const points = [];
+
+        for (let t = 0; t < Math.PI * 2; t += 0.13) {
+
+            // สมการหัวใจ
+            const x = 16 * Math.pow(Math.sin(t), 3);
+            const y = -(13 * Math.cos(t)
+                     - 5 * Math.cos(2 * t)
+                     - 2 * Math.cos(3 * t)
+                     - Math.cos(4 * t));
+
+            points.push({
+                x: 250 + x * 11,
+                y: 220 + y * 11
+            });
+        }
+
+        // เพิ่มคำว่า "รักแฟร์รี่" ตามจุดของหัวใจ
+        points.forEach((point, index) => {
+            const word = document.createElement("span");
+
+            word.className = "word";
+            word.innerHTML = "รักแฟร์รี่ ❤️";
+
+            word.style.left = point.x + "px";
+            word.style.top = point.y + "px";
+            word.style.animationDelay = (index * 0.04) + "s";
+
+            heart.appendChild(word);
+        });
+
+        // ข้อความตรงกลาง
+        setTimeout(() => {
+            const message = document.createElement("div");
+            message.className = "love";
+            message.innerHTML = "รักแฟร์รี่ 💗";
+            heart.appendChild(message);
+        }, 1800);
+    }
+</script>
+
+</body>
+</html>
